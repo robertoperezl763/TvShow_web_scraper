@@ -31,7 +31,8 @@ def getSeasonData(soup: BeautifulSoup) -> Season:
     """
     #Find Show Name and Series Name
     rtTitle = soup.find('rt-text', context="heading", slot='title')
-    thisSeason = Season(season_name = rtTitle.text)
+    rt_season = int(rtTitle.split()[1])
+    thisSeason = Season(season_name = rtTitle.text, season_number=rt_season)
 
     #finds the rotten tomato critics score for the season
     rtCriticReview = soup.find('div',class_='media-scorecard no-border').find('rt-text', slot='criticsScore').text[:-1]

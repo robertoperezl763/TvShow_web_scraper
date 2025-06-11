@@ -4,7 +4,6 @@ from typing import (
 )
 from supabase import create_client
 from config import SUPABASE_KEY, SUPABASE_URL
-
 supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
 
 def fetchTableID(tableName, column_value_pair: List[Tuple[str, str]], nullable = False) -> None:
@@ -17,6 +16,7 @@ def fetchTableID(tableName, column_value_pair: List[Tuple[str, str]], nullable =
     return response.data[0]['id']
 
   except IndexError as error:
+    
     print(f'--Error: Could not find the value ["{searchQuery}"] in column ["{column}"] within the table ["{tableName}"]. Please try again or verify input values')
     print(f'---Error value: {error}')
     return None
@@ -38,7 +38,7 @@ def upsertTableValues(data_to_insert: List[dict], supabase_table_name: str, on_c
       .execute()
     )
 
-    print(f'+++Data Uploaded Successful: {response.data}')
+    print(f'+++Data Uploaded Successful - In Table ["{supabase_table_name}"]: {response.data}')
 
     
 

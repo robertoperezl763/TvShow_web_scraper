@@ -5,3 +5,8 @@ from .functions import (
     parseDate,
     appendZero
 )
+
+from .logging import (
+    print_and_log,
+    get_new_filePath
+)

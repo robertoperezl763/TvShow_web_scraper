@@ -10,6 +10,7 @@ class Season(RoleHandler):
 
   def __init__(self,
                season_name: Optional[str] = None,
+               season_number: Optional[int] = None,
                rt_rating: Optional[float] = None,
                release_date: Optional[str] = None,
                total_episodes: Optional[int] = None,
@@ -18,6 +19,7 @@ class Season(RoleHandler):
                screenwriter: Optional[List[str]] = None,
                ):
     self.season_name = season_name
+    self.season_number = season_number
     self.rt_rating = rt_rating
     self.release_date = release_date
     self.total_episodes = total_episodes
@@ -26,6 +28,17 @@ class Season(RoleHandler):
     self.screenwriter = screenwriter if screenwriter is not None else []
 
     self.episodes: List[Episode] = []
+
+  def getSeason__all(self):
+    return {
+      'season_number': self.season_number,
+      'season_name': self.season_name,
+      'rt_rating': self.rt_rating,
+      'release_date': self.release_date,
+      'directors': self.director,
+      'executive_productes': self.executive_producer,
+      'screenwriters': self.screenwriter,
+    }
 
   def add_episode(self, episode: Episode):
     self.episodes.append(episode)
@@ -49,6 +62,7 @@ class Season(RoleHandler):
   def getSeasonData(self):
     return {
         "season_name": self.season_name.strip(),
+        "season_number": self.season_number,
         "rt_rating": self.rt_rating,
         'release_date': self.release_date.strip(),
         'total_episodes': self.total_episodes

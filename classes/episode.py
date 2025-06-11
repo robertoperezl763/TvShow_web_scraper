@@ -29,6 +29,22 @@ class Episode(RoleHandler):
     self.reviews = reviews if reviews is not None else []
     self.actors = actors if actors is not None else []
 
+    self.episode_number_name = str(episode_number) + "_" + episode_name
+
+  def getEpisode__all(self):
+    return {
+      'episode_number': self.episode_number,
+      'episode_name': self.episode_name,
+      'episode_number_name': self.episode_number_name,
+      'rt_rating': self.rt_rating,
+      'release_date': self.release_date,
+      'directors': self.director,
+      'executive_productes': self.executive_producer,
+      'screenwriters': self.screenwriter,
+      'reviews': self.reviews,
+      'actors': [actor.getActorsData() for actor in self.actors]
+    }
+
   def getCrew(self, crew_Role):
     crew_dict = {
       'Director': self.director, # type: ignore
@@ -54,6 +70,7 @@ class Episode(RoleHandler):
         "screenwriter_id": fetchTableID('People', [('person_name', self.screenwriter)]),
         "episode_number": self.episode_number,
         "episode_name": getStripStringOrNone(self.episode_name),
+        "episode_and_name": self.episode_number_name,
         "rt_rating": self.rt_rating,
         "release_date": getStripStringOrNone(self.release_date)
     }

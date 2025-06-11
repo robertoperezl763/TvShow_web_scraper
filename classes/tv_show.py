@@ -10,6 +10,12 @@ class TvShow:
     self.season_count = season_count
     self.seasons: List[Season] = []
 
+  def getTvshow__all(self):
+    return {
+      'tv_show_title': self.tv_show_title,
+      'season_count': self.season_count,
+    }
+
   def add_season(self, season: Season):
     self.seasons.append(season)
 
